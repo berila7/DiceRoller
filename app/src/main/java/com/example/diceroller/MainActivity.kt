@@ -5,6 +5,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 
 class MainActivity : AppCompatActivity() {
     private lateinit var rollBtn: Button
@@ -37,16 +38,35 @@ class MainActivity : AppCompatActivity() {
     }
     private fun winCheck(numsSides: Int) {
         val luckyNum = 6
+        var color = 0
         val greetingMessage: TextView = findViewById(R.id.textView2)
-        val resultText = when(numsSides) {
-            1 -> "So sorry! You rolled a 1. Try again!"
-            2 -> "Sadly, you rolled a 2. Try again!"
-            3 -> "Unfortunately, you rolled a 3. Try again!"
-            5 -> "Don't cry! You rolled a 5. Try again!"
-            luckyNum -> "You win!"
-            else -> "Apologies! You rolled a 4. Try again!"
+        when(numsSides) {
+            1 -> {
+                greetingMessage.text = "So sorry! You rolled a 1. Try again!"
+                color = R.color.md_theme_light_error
+            }
+            2 -> {
+                greetingMessage.text = "Sadly, you rolled a 2. Try again!"
+                color = R.color.md_theme_light_error
+            }
+            3 -> {
+                greetingMessage.text = "Unfortunately, you rolled a 3. Try again!"
+                color = R.color.md_theme_light_error
+            }
+            5 -> {
+                greetingMessage.text = "Don't cry! You rolled a 5. Try again!"
+                color = R.color.md_theme_light_error
+            }
+            luckyNum -> {
+                greetingMessage.text = "You win!"
+                color = R.color.md_theme_light_primary
+            }
+            else -> {
+                greetingMessage.text = "Apologies! You rolled a 4. Try again!"
+                color = R.color.md_theme_light_error
+            }
         }
-        greetingMessage.text = resultText
+        greetingMessage.setTextColor(ContextCompat.getColor(this, color))
     }
 }
 
